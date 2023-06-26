@@ -1,0 +1,18 @@
+table {
+    border-collapse: inherit;
+}
+.thead-light {
+    background-color: rgb(231, 231, 231);
+    font-weight: 400;
+}
+.thead-light th {
+    font-weight: 500;
+}
+
+table tbody tr td {
+    cursor: pointer;
+}
+.icon{
+    color: rgb(99, 98, 98);
+    margin: 5px;
+}
