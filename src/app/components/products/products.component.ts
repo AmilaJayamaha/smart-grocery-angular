@@ -10,10 +10,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  public firstProductItemName = "White Basmathi Rice" ;
 
-  public getPriceofRice(){
-    return 350;
-  }
 
   }
