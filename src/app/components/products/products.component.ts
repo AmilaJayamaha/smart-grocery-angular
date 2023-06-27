@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   public rowIndex!: number;
+  showAddProduct!: boolean;
 
   constructor() {}
 
@@ -49,5 +50,13 @@ export class ProductsComponent implements OnInit {
 
   public selectProduct(selectedRow: number) {
     this.rowIndex = selectedRow;
+  }
+
+  showAddProducts() {
+    this.showAddProduct = true;
+  }
+
+  hideAddProducts() {
+    this.showAddProduct = false;
   }
 }

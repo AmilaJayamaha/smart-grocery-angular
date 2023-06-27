@@ -105,6 +105,6 @@
   },
   "defaultProject": "SmartGrocery",
   "cli": {
-    "analytics": "06b8ac4d-c4e3-4573-8fe4-8ababf6483c3"
+    "analytics": false
   }
 }
