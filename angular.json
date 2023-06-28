@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SmartGrocery": {
+    "Playground_Activities": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/smart-grocery",
+            "outputPath": "dist/playground-activities",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,8 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -72,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SmartGrocery:build:production"
+              "browserTarget": "Playground_Activities:build:production"
             },
             "development": {
-              "browserTarget": "SmartGrocery:build:development"
+              "browserTarget": "Playground_Activities:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SmartGrocery:build"
+            "browserTarget": "Playground_Activities:build"
           }
         },
         "test": {
@@ -106,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "SmartGrocery"
+  "defaultProject": "Playground_Activities"
 }
