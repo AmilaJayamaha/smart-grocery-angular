@@ -1,29 +1,21 @@
 <div class="container-fluid main-content">
   <div class="row">
-    <section [ngClass]="showAddProduct ? 'col-md-7' : 'col-md-12'">
+    <section
+      [ngClass]="showAddProduct || showEditProduct ? 'col-md-7' : 'col-md-12'"
+    >
       <div class="product-header">
-        <h1>Product List
-            <span *ngIf="!isLoading" (click)="refresh()" style="cursor: pointer;">
-                <i class="fa fa-refresh" aria-hidden="true"></i>
-            </span>
-            <i *ngIf="isLoading" class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i>
+        <h1>
+          Product List
+          <span *ngIf="!isLoading" (click)="refresh()" style="cursor: pointer">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </span>
+          <i
+            *ngIf="isLoading"
+            class="fa fa-refresh fa-spin fa-fw"
+            aria-hidden="true"
+          ></i>
         </h1>
-        <button
-          *ngIf="!showAddProduct"
-          type="button"
-          class="btn btn-outline-primary"
-          (click)="showAddProducts()"
-        >
-          Add Product
-        </button>
-        <button
-          *ngIf="showAddProduct"
-          type="button"
-          class="btn btn-outline-primary"
-          (click)="hideAddProducts()"
-        >
-          Close Products
-        </button>
+        <button type="button" class="btn btn-outline-primary" (click)="showAddProducts()">Add Product</button>
       </div>
       <table class="table">
         <thead class="thead-light t-head">
@@ -41,13 +33,13 @@
         <tbody>
           <tr
             *ngFor="let product of products; let i = index"
-            (click)="selectProduct(i)"
+            (click)="selectProduct(i, product)"
             [ngClass]="rowIndex == i ? 'active' : ''"
           >
             <td>{{ product.id }}</td>
             <td>{{ product.productName }}</td>
             <td>{{ product.description | contentLimitter }}</td>
-            <td>{{ product.createdDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{ product.createdDate | date: "dd/MM/yyyy" }}</td>
             <td>{{ product.quantity }}</td>
             <td>{{ product.unitPrice | currency: "Rs." }}</td>
             <td>
@@ -66,6 +58,7 @@
                 type="button"
                 [disabled]="rowIndex != i"
                 class="btn-xs icon"
+                (click)="OpenEditProductView()"
               >
                 <i class="fa fa-pencil-square-o"></i>
               </button>
@@ -74,8 +67,9 @@
         </tbody>
       </table>
     </section>
-    <section class="col-md-5" *ngIf="showAddProduct">
-      <app-add-product></app-add-product>
+    <section class="col-md-5" *ngIf="showAddProduct || showEditProduct">
+      <app-add-product *ngIf="showAddProduct" (cancelAddView) = "hideAddProducts()" (productAddEvent) ="updateProductList()"></app-add-product>
+      <app-edit-product *ngIf="showEditProduct" [product] = "selectedProduct" (cancelEditView) = closeEditView() (productAddEvent) ="updateProductList()"></app-edit-product>
     </section>
   </div>
 </div>

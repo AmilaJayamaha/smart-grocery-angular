@@ -12,7 +12,7 @@ export class ProductService {
   private baseUrl = 'https://host1.open.uom.lk/';
 
   constructor(private http: HttpClient) {}
-  
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -27,5 +27,9 @@ export class ProductService {
 
   getProducts(): Observable<ProductResponse> {
     return this.http.get<ProductResponse>(this.baseUrl + 'api/products');
+  }
+
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'api/products', product);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../../Models/product.model';
 import { ProductService } from '../../Services/product.service';
@@ -13,7 +13,7 @@ export class AddProductComponent implements OnInit {
     productName: ['', Validators.required],
     description: ['', Validators.required],
     category: ['', Validators.required],
-    brand : ['', Validators.required],
+    brand: ['', Validators.required],
     expiredDate: ['', Validators.required],
     manufacturedDate: ['', Validators.required],
     batchNumber: ['', Validators.required],
@@ -22,13 +22,17 @@ export class AddProductComponent implements OnInit {
   });
 
   isDataUploading = false;
+  @Output() cancelAddView: EventEmitter<void> = new EventEmitter<void>();
+  @Output() productAddEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private fb: FormBuilder,
-    private productService :ProductService) {}
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {}
 
-   get f() {
+  get f() {
     return this.productFrom.controls;
   }
 
@@ -37,9 +41,13 @@ export class AddProductComponent implements OnInit {
     values.createdDate = new Date().toDateString();
     this.isDataUploading = true;
     this.productService.addProduct(values as Product).subscribe((res) => {
-      debugger;
+      this.productAddEvent.emit();
       this.isDataUploading = false;
       this.productFrom.reset();
     });
+  }
+
+  cancel() {
+    this.cancelAddView.emit();
   }
 }

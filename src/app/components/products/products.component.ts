@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../../Models/product.model';
 import { ProductService } from '../../Services/product.service';
 
@@ -11,19 +11,25 @@ export class ProductsComponent implements OnInit {
   public rowIndex!: number;
   showAddProduct!: boolean;
   isLoading: boolean = false;
-
+  showEditProduct!: boolean;
+  selectedProduct!: Product;
+  message!: string;
+  public products: Product[] = [];
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
-  public products: Product[] = [];
 
-  public selectProduct(selectedRow: number) {
+  public selectProduct(selectedRow: any, product: Product) {
     this.rowIndex = selectedRow;
+    this.selectedProduct = product;
   }
 
   showAddProducts() {
+    if (this.showEditProduct) {
+      this.showEditProduct = false;
+    }
     this.showAddProduct = true;
   }
 
@@ -42,4 +48,22 @@ export class ProductsComponent implements OnInit {
       this.isLoading = false;
     });
   }
+
+  OpenEditProductView() {
+    if (this.showAddProduct) {
+      this.showAddProduct = false;
+    }
+    this.showEditProduct = true;
+  }
+
+  closeEditView() {
+    this.showEditProduct = false;
+  }
+
+  updateProductList() {
+    this.getProducts();
+  }
+}
+function ViewProductComponent(ViewProductComponent: any) {
+  throw new Error('Function not implemented.');
 }
